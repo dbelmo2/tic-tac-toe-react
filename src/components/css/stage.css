@@ -1,0 +1,16 @@
+.main-stage {
+    background-color: black;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.player-section {
+    flex: 1;
+    display: flex;
+    outline: 1px solid white;
+    background-color: blueviolet;
+    align-items: center;
+    justify-content: center;
+}
