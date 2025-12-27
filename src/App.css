@@ -1,9 +1,11 @@
 body {
   background-color: #3f0000;
   color: white;
+
 }
 
 .App {
+  background-color: green;
   display: flex;
   flex-direction: column;
   align-items: center;

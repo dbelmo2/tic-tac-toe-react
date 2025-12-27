@@ -1,5 +1,5 @@
 .main-stage {
-    background-color: black;
+    background-color: #3a3a3a;
     width: 500px;
     height: 500px;
     display: flex;
@@ -9,8 +9,40 @@
 .player-section {
     flex: 1;
     display: flex;
-    outline: 1px solid white;
-    background-color: blueviolet;
     align-items: center;
     justify-content: center;
+}
+
+.player-section.enemy {
+    border-bottom: white 2px solid;
+}
+
+.cards-container {
+    display: flex;
+    align-self: flex-end;
+    margin: 10px;
+}
+
+.card {
+    width: 85px;
+    height: 80px;
+    margin: 20px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.cards-container.enemy {
+    align-self: flex-start;
+}
+
+.flip-horizontal {
+  transform: scaleY(-1);
+  /* Optional: vendor prefixes for older browser support */
+  -webkit-transform: scaleY(-1); /* Safari and Chrome */
+  -moz-transform: scaleY(-1);    /* Firefox */
+  -o-transform: scaleY(-1);      /* Opera */
+  -ms-transform: scaleY(-1);     /* Internet Explorer 9 */
 }
