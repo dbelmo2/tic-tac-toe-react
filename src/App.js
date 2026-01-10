@@ -12,23 +12,26 @@ function App() {
 
   const handleNameSubmit = (e) => {
     if (e.key === 'Enter' && inputValue.trim()) {
-      setUserName(inputValue.trim());
+      const name = inputValue.trim();
+      setUserName(name);
       setShowOverlay(false);
+      
+      // Register player and setup listener when name is entered
+      socket.emit("registerPlayer", name);
+      socket.on("playersConnected", (data) => {
+        console.log("Players connected:", JSON.stringify(data));
+      });
     }
   };
 
  useEffect(() => {
-    if (socket.connected === false) {
-      socket.on("connect", () => {
-        console.log("Connected to server");
-        socket.emit("registerPlayer", userName)
-        socket.on("playersConnected", (data) => {
-          console.log("Players connected:", JSON.stringify(data));
-        })
-      })
-    }
+    socket.on("connect", () => {
+      console.log("Connected to server");
+    });
 
     return () => {
+      socket.off("connect");
+      socket.off("playersConnected");
       if (socket.connected) {
         socket.disconnect();
       }
