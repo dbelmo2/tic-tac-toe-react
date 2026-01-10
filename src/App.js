@@ -21,7 +21,7 @@ function App() {
     if (socket.connected === false) {
       socket.on("connect", () => {
         console.log("Connected to server");
-        socket.emit("registerPlayer", "Bob")
+        socket.emit("registerPlayer", userName)
         socket.on("playersConnected", (data) => {
           console.log("Players connected:", JSON.stringify(data));
         })
