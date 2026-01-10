@@ -1,4 +1,4 @@
-import './css/stage.css';
+ import './css/stage.css';
 import Rock from '../assets/images/rock.png'
 import Paper from '../assets/images/paper.png'
 import Scissors from '../assets/images/scissors.png'
