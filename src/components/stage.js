@@ -7,8 +7,6 @@ import Scissors from '../assets/images/scissors.png'
 function Stage() {
 
 
-
-
     return (
         <>
             <div className="main-stage">

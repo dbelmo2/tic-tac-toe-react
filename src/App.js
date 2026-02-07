@@ -2,36 +2,23 @@ import Stage from './components/stage';
 import Player from "./components/Player"
 import { useEffect, useState } from 'react';
 import socket from './socket';
+import CircleIcon from '@mui/icons-material/Circle';
 
 import './App.css';
 
 function App() {
-  const [userName, setUserName] = useState('');
-  const [showOverlay, setShowOverlay] = useState(true);
-  const [inputValue, setInputValue] = useState('');
 
-  const handleNameSubmit = (e) => {
-    if (e.key === 'Enter' && inputValue.trim()) {
-      const name = inputValue.trim();
-      setUserName(name);
-      setShowOverlay(false);
-      
-      // Register player and setup listener when name is entered
-      socket.emit("registerPlayer", name);
-      socket.on("playersConnected", (data) => {
-        console.log("Players connected:", JSON.stringify(data));
-      });
-    }
-  };
+  const [isConnected, setIsConnected] = useState(false);
 
  useEffect(() => {
     socket.on("connect", () => {
       console.log("Connected to server");
+      setIsConnected(true);
     });
 
     return () => {
-      socket.off("connect");
-      socket.off("playersConnected");
+      socket.off("connect")
+      socket.off("playersConnected")
       if (socket.connected) {
         socket.disconnect();
       }
@@ -39,27 +26,17 @@ function App() {
 
  }, [])
 
+ 
 
   return (
     <div className="App">
-      {showOverlay && (
-        <div className="overlay">
-          <div className="overlay-content">
-            <h2>Welcome!</h2>
-            <p>Please enter your name:</p>
-            <input
-              type="text"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyPress={handleNameSubmit}
-              placeholder="Your name"
-              autoFocus
-            />
-            <p className="hint">Press Enter to continue</p>
-          </div>
-        </div>
-      )}
-      <Player name={userName || 'Player 1'} />
+      <CircleIcon style={{
+        color: isConnected ? "green" : "red",
+        position: 'absolute',
+        top: 50,
+        right: 50
+      }} />
+      <Player name={'Player 1'} />
       <Stage />
       <Player name='Player 2'/>
     </div>
